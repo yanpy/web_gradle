@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+    <!-- 加载申明的Bean -->
+    <context:component-scan base-package="com" />
+
+    <!-- 加载properties -->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <!--<property name="SystemPropertiesModeName" value="ENVIRONMENT" />-->
+        <property name="locations">
+            <list>
+                <value>classpath:properties/webapp.properties</value>
+                <value>classpath:properties/db.properties</value>
+                <value>classpath:properties/jedis.properties</value>
+                <value>classpath:properties/rabbit.properties</value>
+                <value>classpath:properties/vendor.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 国际化message -->
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basename" value="messages.message" />
+        <property name="cacheSeconds" value="3600" />
+    </bean>
+
+    <!--<bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">-->
+        <!--<property name="defaultLocale" value="zh_CN" />-->
+        <!--<property name="cookieName" value="Language"/>-->
+        <!--<property name="cookieMaxAge" value="604800" />-->
+        <!--<property name="cookiePath" value="/" />-->
+    <!--</bean>-->
+
+    <!-- 加载buildinfo.properties（与gradle相关） -->
+    <!--<util:properties id="buildInfo" location="classpath:properties/buildinfo.properties"/>-->
+    <bean id="buildInfo" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="location" value="classpath:properties/buildinfo.properties" />
+    </bean>
+
+    <!-- MVC config -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+        <property name="prefix" value="/jsp/"></property>
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+
+    <!-- 其他配置 -->
+    <import resource="db.xml" />
+    <!--<import resource="jedis.xml" />-->
+    <!--<import resource="rabbit.xml"/>-->
+
+</beans>
