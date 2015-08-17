@@ -7,7 +7,8 @@ Java idea gradle spring boot 1.2.5 spring mvc4.1 + mybatis3.2
 
 
 #用到的组件
-
+PageHelper4.0分页插件
+gradle2.5
 
 
 #后期准备实现的功能
