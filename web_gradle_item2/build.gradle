@@ -48,8 +48,9 @@ dependencies {
     compile("org.mybatis:mybatis-spring:1.2.2")
     compile("org.apache.commons:commons-dbcp2:2.1")
     compile("mysql:mysql-connector-java:5.1.35")
-    compile files("E:\\Java\\jar\\PageHelper4.0\\pagehelper-4.0.0.jar")
-    compile files("E:\\Java\\jar\\PageHelper4.0\\jsqlparser-0.9.3.jar")
+//    compile files("$buildDir/libs/pagehelper-4.0.0.jar")
+//    compile files("E:\\Java\\jar\\PageHelper4.0\\jsqlparser-0.9.3.jar")
+    compile fileTree(dir: 'libs', include: '*.jar')
 
     compile("org.aspectj:aspectjrt:1.8.6")
     compile("org.aspectj:aspectjweaver:1.8.6")
